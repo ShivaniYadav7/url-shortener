@@ -15,7 +15,7 @@ app.use(express.json());
 const port = process.env.PORT || 8080;
 
 const allowedOrigins = [
-    "https://ShivaniYadav7.github.io/url-shortener"
+    "https://shivaniyadav7.github.io"
 ];
 
 app.use(cors({
