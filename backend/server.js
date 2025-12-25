@@ -3,12 +3,26 @@ require("dotenv").config();
 // Importing required Node.js modules and custom files
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const Url = require("./models/url");
-
-// Routes
 const UrlRouter = require("./routes/url");
+const UrlController = require("./controllers/url");
+
+const app = express();
+
+app.use(express.json());
 
 const port = process.env.PORT || 8080;
+
+const allowedOrigins = [
+    "https://ShivaniYadav7.github.io/url-shortener"
+];
+
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true 
+}));
 
 // MongoDB connection URL
 const dbUrl = process.env.ATLAS_URL || "mongodb://127.0.0.1:27017/url-shortener";
@@ -18,12 +32,10 @@ mongoose.set("strictQuery", false);
 
 mongoose.connect(dbUrl).then(() => console.log("MongoDB connected successfully")).catch((err) => console.error("MongoDB connection error:", err));
 
-const app = express();
-
-app.use(express.json());
-
 // Routes
 app.use("/url",UrlRouter);
+
+app.get('/:shortUrl', UrlController.redirectUrl);
 
 app.get("/",async (req, res) => {
     try{

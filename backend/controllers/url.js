@@ -15,13 +15,14 @@ const generateShortCode = (inputString) => {
 module.exports.createShortUrl = async (req, res) => {
 
     const { longUrl } = req.body;
+    const baseUrl = process.env.BASE_URL;
 
     try {
         let existingUrl = await Url.findOne({longUrl: longUrl});
 
         if (existingUrl){
             return res.status(200).json({
-                shortUrl: existingUrl.shortUrl,
+                shortUrl: `${baseUrl}/${existingUrl.shortUrl}`,
                 status: "found"
             });
         }
@@ -36,8 +37,10 @@ module.exports.createShortUrl = async (req, res) => {
 
         await newUrl.save();
 
+        
+
         return res.status(201).json({
-            shortUrl: shortCode,
+            shortUrl: `${baseUrl}/${shortCode}`,
             status: "created"
         });
     } catch (err) {
