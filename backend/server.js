@@ -15,7 +15,7 @@ app.use(express.json());
 const port = process.env.PORT || 8080;
 
 const allowedOrigins = [
-    "https://shivaniyadav7.github.io"
+    "https://shivaniyadav7.github.io","http://localhost:5173"
 ];
 
 app.use(cors({
@@ -38,12 +38,7 @@ app.use("/url",UrlRouter);
 app.get('/:shortUrl', UrlController.redirectUrl);
 
 app.get("/",async (req, res) => {
-    try{
-        const urls = await Url.find({});
-        res.json(urls);
-    } catch (err ) {
-        res.status(500).json({ error: "Could not fetch URLs"});
-    }
+    res.send("MinionURL is Live!Visit us at https://shivaniyadav7.github.io/url-shortener/")
 });
 
 app.listen(port, () => {
