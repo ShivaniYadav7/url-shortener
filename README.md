@@ -40,8 +40,52 @@ You can run the backend service instantly using my pre-built Docker image. You d
 docker pull shippdocker/minion-backend:latest
 ```
 ### 2. Run the Container
+```bash
 docker run -d -p 8080:8080 \
   -e ATLAS_URL="your_mongodb_connection_string_here" \
   -e BASE_URL="http://localhost:8080" \
   --name minion-backend \
   shippdocker/minion-backend:latest
+```
+
+## Local Development Setup
+### 1) Clone the Repository
+```bash
+git clone [https://github.com/ShivaniYadav7/url-shortener.git](https://github.com/ShivaniYadav7/url-shortener.git)
+cd url-shortener
+```
+
+### 2) Backend Setup
+```bash
+cd backend
+npm install
+
+# Create a .env file or export variables
+# ATLAS_URL=your_mongodb_connection_string_here
+# BASE_URL=http://localhost:8080
+
+npm start
+```
+
+### 3) Frontend Setup
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+## Project Structure
+url-shortener/
+├── backend/                 # Express API & Database Logic
+│   ├── models/              # Mongoose schemas
+│   ├── controllers/         # Request handling + business logic
+│   ├── routes/              # API routes
+│   ├── Dockerfile           # Backend container config
+│   └── server.js            # App entry point
+│
+├── frontend/                # React client (Vite)
+│   ├── src/                 # UI components + hooks
+│   ├── public/              # Static assets
+│   └── vite.config.js       # Build configuration
+│
+└── README.md                # Project documentation
