@@ -75,6 +75,7 @@ npm run dev
 ```
 
 ## Project Structure
+```text
 url-shortener/
 ├── backend/                 # Express API & Database Logic
 │   ├── models/              # Mongoose schemas
@@ -89,3 +90,4 @@ url-shortener/
 │   └── vite.config.js       # Build configuration
 │
 └── README.md                # Project documentation
+```
